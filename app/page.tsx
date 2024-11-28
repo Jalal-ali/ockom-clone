@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Bubble from './components/Bubble.js';
 import Navbar from './components/Navbar.js';
-import type { AppProps } from "next/app"; 
+
 
 const page = () => {
 

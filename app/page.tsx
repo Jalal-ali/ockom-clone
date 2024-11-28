@@ -1,13 +1,16 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Bubble from './components/bubble.js';
+import Bubble from './components/Bubble.js';
 import Navbar from './components/Navbar.js';
+import type { AppProps } from "next/app"; 
+
 const page = () => {
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false); // Set loading to false after fetching or processing
+      setLoading(false);
     }, 2000); 
   } , []);
 
@@ -26,7 +29,7 @@ const page = () => {
   return (
     <>
     <Navbar/>
-        <div className='scroll-smooth' style={{ zIndex: 1}}>
+        <div className='scroll-smooth scroll-container' style={{ zIndex: 1}}>
           {/* bubble background  */}
       <Bubble />
       <div className="fixed top-[40%] left-0 h-50 w-14 bg-white text-black text-center py-4 shadow-lg z-50">
@@ -187,7 +190,7 @@ const page = () => {
 {/* fifth content box ended */}
 
 {/* footer  */}
-<div className='bg-[#2a2927] p-10'>
+<div className='bg-[#2a2927] p-10 mb-20'>
 <footer className=" flex items-center justify-center bg-cover bg-center bg-[url('/path-to-your-background.jpg')]">
   <div className="w-screen max-w-screen bg-gray-400/15 backdrop-blur-md rounded-lg shadow-lg py-6  lg:p-10 flex-grow">
     <div className="md:flex md:justify-between">

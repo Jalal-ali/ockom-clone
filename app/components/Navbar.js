@@ -29,7 +29,7 @@ const show = () => {
         </svg>
     </button>
     <div className={hambrgr ? "hidden w-full md:block md:w-auto" : "w-full md:block md:w-auto"}  id="navbar-default">
-      <ul className="font-medium flex flex-col p-4  md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-16 rtl:space-x-reverse md:mt-0 md:border-0 bg-transparent">
+      <ul className="font-medium flex flex-col p-4 mr-5 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-16 rtl:space-x-reverse md:mt-0 md:border-0 bg-transparent">
         <li>
           <a href="#" className="block py-2 px-3 bg-[#ff1313] rounded md:bg-transparent md:text-[#ffffff] md:p-0 text-white md:dark:text-[#ff1313]" aria-current="page">PRODUCTS +</a>
         </li>

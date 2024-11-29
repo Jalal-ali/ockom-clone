@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { Noise } from 'noisejs';
 
 const Bubble = () => {
-  const mountRef = useRef(null); 
+  const mountRef = useRef(null);
 
   useEffect(() => {
     const noise = new Noise(Math.random());
@@ -49,15 +49,23 @@ const Bubble = () => {
     const vertex = new THREE.Vector3();
     const positions = sphereGeometry.attributes.position;
 
+    // Function to update geometry with Perlin noise and make the shape change slowly
     const updateGeometry = () => {
-      const time = performance.now() * 0.003;
+      const time = performance.now() * 0.0001; // Slower time factor
       const k = 1;
 
-      // Update vertices using Perlin noise
+      // Update vertices using Perlin noise with a more dynamic effect
       for (let i = 0; i < positions.count; i++) {
         vertex.fromBufferAttribute(positions, i).setLength(k);
+
+        // Apply Perlin noise for shape change
         const n = noise.perlin3(vertex.x + time, vertex.y + time, vertex.z + time);
-        vertex.setLength(1 + 0.3 * n);
+        
+        // Apply dynamic scaling factor to make the bubble change shape slowly
+        const scaleFactor = 1 + 0.3 * n + 0.1 * Math.sin(time + vertex.x * 3); // Added sine for continuous variation
+        
+        // Set vertex position with the new scale factor for deformation
+        vertex.setLength(scaleFactor);
         positions.setXYZ(i, vertex.x, vertex.y, vertex.z);
       }
 
@@ -67,11 +75,19 @@ const Bubble = () => {
 
     const clock = new THREE.Clock(); 
 
-    // Animation loop
+    // Animation loop with slowed down rotation, shape deformation, and volume expansion
+    let scaleTime = 0; // Initialize scale time
     const animate = () => {
       const delta = clock.getDelta(); 
-      sphere.rotation.x += delta * 0.01; 
-      sphere.rotation.y += delta * 0.01;
+      
+      // Apply slow rotation
+      sphere.rotation.x += delta * 0.3; // Slower rotation
+      sphere.rotation.y += delta * 0.3; // Slower rotation
+
+      // Scale the bubble (increase volume over time)
+      scaleTime += delta * 0.1; // Control the rate of expansion
+      const scaleAmount = 1 + Math.sin(scaleTime) * 0.2; // Make it oscillate
+      sphere.scale.set(scaleAmount, scaleAmount, scaleAmount); // Apply uniform scaling
 
       updateGeometry();
       renderer.render(scene, camera);

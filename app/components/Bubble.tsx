@@ -5,11 +5,11 @@ import * as THREE from 'three';
 import { Noise } from 'noisejs';
 
 const Bubble = () => {
-  const mountRef = useRef(null);
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const noise = new Noise(Math.random());
-
+    if (!mountRef.current) return;
     // Set up the renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setClearColor(0x2a2927); // Set background color

@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Bubble from './components/Bubble.js';
-import Navbar from './components/Navbar.js';
+import Bubble from './components/Bubble';
+import Navbar from './components/Navbar';
 
 
 const page = () => {
